@@ -1,0 +1,34 @@
+from pathlib import Path
+
+from aoc2020 import AOC_DIR
+from aoc2020.util import print_solutions
+
+
+INPUT_FILENAME = AOC_DIR / 'inputs' / '${input_filename}'
+
+
+def load(filename: Path = INPUT_FILENAME):
+    with open(filename, 'r') as f:
+        return f.read()
+
+
+def solve_part1(input_):
+    return
+
+
+def solve_part2(input_):
+    return
+
+
+def main(show_solution: bool = True):
+    input_ = load(INPUT_FILENAME)
+
+    result1 = solve_part1(input_)
+    result2 = solve_part2(input_)
+
+    if show_solution:
+        print_solutions(result1, result2)
+
+
+if __name__ == '__main__':
+    main()
