@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from aoc2020 import AOC_DIR
-from aoc2020.util import print_solutions
+from aoc2021 import AOC_DIR
+from aoc2021.util import print_solutions
 
 
 INPUT_FILENAME = AOC_DIR / 'inputs' / '${input_filename}'

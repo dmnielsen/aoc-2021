@@ -1,6 +1,6 @@
 import pytest
 
-from aoc2020 import ${module_name} as day
+from aoc2021 import ${module_name} as day
 
 
 @pytest.fixture
