@@ -52,7 +52,7 @@ def solve_part2(input_: List[str]) -> int:
         delta_x, delta_y, delta_aim = calculate_direction_update(instruction)
         aim += delta_aim
         x += delta_x
-        y += (delta_y * aim)
+        y += delta_y * aim
     return x * y
 
 

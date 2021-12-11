@@ -32,33 +32,28 @@ def mock_input():
 
 def test_parse_input(mock_tiny_input):
     expected = np.array(
-        [['0', '0', '1', '0', '0'],
-         ['1', '1', '1', '1', '0'],
-         ['1', '0', '1', '1', '0']]
+        [['0', '0', '1', '0', '0'], ['1', '1', '1', '1', '0'], ['1', '0', '1', '1', '0']]
     )
     result = day.parse_input(mock_tiny_input)
     np.testing.assert_array_equal(result, expected)
+
 
 @pytest.fixture
 def mock_report(mock_input):
     return day.parse_input(mock_input)
 
 
-@pytest.mark.parametrize('bits, expected',
-                         [(['0', '0', '0'], '0'),
-                          (['1', '0', '1'], '1'),
-                          (['0', '1'], '1')
-                          ])
+@pytest.mark.parametrize(
+    'bits, expected', [(['0', '0', '0'], '0'), (['1', '0', '1'], '1'), (['0', '1'], '1')]
+)
 def test_return_most_frequent_bit(bits, expected):
     result = day.return_most_frequent_bit(bits)
     assert result == expected
 
 
-@pytest.mark.parametrize('bits, expected',
-                         [(['0', '0', '1'], '1'),
-                          (['1', '0', '1'], '0'),
-                          (['0', '1'], '0')
-                          ])
+@pytest.mark.parametrize(
+    'bits, expected', [(['0', '0', '1'], '1'), (['1', '0', '1'], '0'), (['0', '1'], '0')]
+)
 def test_return_least_frequent_bit(bits, expected):
     result = day.return_least_frequent_bit(bits)
     assert result == expected
