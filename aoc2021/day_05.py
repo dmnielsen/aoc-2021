@@ -1,12 +1,10 @@
 import re
-
 from collections import Counter, namedtuple
 from pathlib import Path
 from typing import List, NamedTuple, Tuple
 
 from aoc2021 import AOC_DIR
 from aoc2021.util import print_solutions
-
 
 INPUT_FILENAME = AOC_DIR / 'inputs' / '202105_input.txt'
 

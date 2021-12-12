@@ -1,10 +1,11 @@
-import sys
 import argparse as arg
+import sys
 from pathlib import Path
-import requests
 from string import Template
-from aoc2021.util import NEW_DAY_TEMPLATE, NEW_TEST_TEMPLATE
 
+import requests
+
+from aoc2021.util import NEW_DAY_TEMPLATE, NEW_TEST_TEMPLATE
 
 YEAR = 2021
 AOC_BASE_URL = 'https://adventofcode.com'

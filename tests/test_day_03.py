@@ -1,5 +1,4 @@
 import numpy as np
-
 import pytest
 
 from aoc2021 import day_03 as day

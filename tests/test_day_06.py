@@ -1,4 +1,5 @@
 from collections import Counter
+
 import pytest
 
 from aoc2021 import day_06 as day

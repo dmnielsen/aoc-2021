@@ -1,10 +1,10 @@
-import numpy as np
 from pathlib import Path
 from typing import List, Set, Tuple
 
+import numpy as np
+
 from aoc2021 import AOC_DIR
 from aoc2021.util import print_solutions
-
 
 INPUT_FILENAME = AOC_DIR / 'inputs' / '202104_input.txt'
 

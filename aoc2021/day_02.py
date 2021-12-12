@@ -4,7 +4,6 @@ from typing import List, Tuple
 from aoc2021 import AOC_DIR
 from aoc2021.util import print_solutions
 
-
 INPUT_FILENAME = AOC_DIR / 'inputs' / '202102_input.txt'
 
 
