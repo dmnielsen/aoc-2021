@@ -37,7 +37,7 @@ def parse_input(text: str) -> Tuple[List[str], List[BingoBoard]]:
     number_draw = text[0].split(',')
     board_rows = np.reshape(np.array(text[1:]), (-1, 5))
 
-    boards = [BingoBoard(board_rows[i:i+5]) for i in range(0, len(board_rows), 5)]
+    boards = [BingoBoard(board_rows[i : i + 5]) for i in range(0, len(board_rows), 5)]
 
     return number_draw, boards
 
@@ -46,7 +46,7 @@ def solve_part1(input_: str) -> int:
     numbers, boards = parse_input(input_)
 
     for i, number in enumerate(numbers[4:], start=4):
-        called_numbers = numbers[:i+1]
+        called_numbers = numbers[: i + 1]
         for board in boards:
             if board.is_bingo(set(called_numbers)):
                 return int(number) * board.calculate_board_score(set(called_numbers))
@@ -56,7 +56,7 @@ def solve_part2(input_: str) -> int:
     numbers, boards = parse_input(input_)
 
     for i, number in enumerate(numbers[4:], start=4):
-        called_numbers = numbers[:i+1]
+        called_numbers = numbers[: i + 1]
 
         for i, board in enumerate(boards):
             bingo_status = board.is_bingo(set(called_numbers))
