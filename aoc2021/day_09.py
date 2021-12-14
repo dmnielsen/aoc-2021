@@ -1,6 +1,6 @@
 from math import prod
 from pathlib import Path
-from typing import Dict
+from typing import Dict, List
 
 from aoc2021 import AOC_DIR
 from aoc2021.util import print_solutions
@@ -51,7 +51,7 @@ class HeightmapPoint:
         return [n for n in points if ((0 <= n.row < self.max_row) and (0 <= n.col < self.max_col))]
 
 
-def load(filename: Path = INPUT_FILENAME):
+def load(filename: Path = INPUT_FILENAME) -> str:
     with open(filename, 'r') as f:
         return f.read()
 
@@ -71,7 +71,7 @@ def parse_input(text: str) -> Dict[Coordinate, HeightmapPoint]:
     return heightmaps
 
 
-def find_low_points(heightmaps: Dict[Coordinate, HeightmapPoint]):
+def find_low_points(heightmaps: Dict[Coordinate, HeightmapPoint]) -> List[Coordinate]:
     low_points = []
     for point_coords, info in heightmaps.items():
         neighbor_values = [heightmaps[coords].height for coords in info.neighbors]
@@ -80,7 +80,9 @@ def find_low_points(heightmaps: Dict[Coordinate, HeightmapPoint]):
     return low_points
 
 
-def find_basin(low_point: Coordinate, heightmaps: Dict[Coordinate, HeightmapPoint]):
+def find_basin(
+    low_point: Coordinate, heightmaps: Dict[Coordinate, HeightmapPoint]
+) -> List[Coordinate]:
     basin_points = [low_point]
     to_check = set(heightmaps[low_point].neighbors)
     checked = {low_point}
@@ -101,7 +103,7 @@ def solve_part1(input_: str) -> int:
     return sum([all_points[coords].risk for coords in low_points])
 
 
-def solve_part2(input_):
+def solve_part2(input_: str) -> int:
     all_points = parse_input(input_)
     low_points = find_low_points(all_points)
     basin_sizes = [len(find_basin(low_point, all_points)) for low_point in low_points]
