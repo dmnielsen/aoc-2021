@@ -18,33 +18,46 @@ def mock_input():
     return text
 
 
-@pytest.mark.parametrize('line, expected', [('{([(<{}[<>[]}>{[]{[(<()>', '}'),
-                                            ('[[<[([]))<([[{}[[()]]]', ')'),
-                                            ('[{[{({}]{}}([{[{{{}}([]', ']'),
-                                            ('[<(<(<(<{}))><([]([]()', ')'),
-                                            ('<{([([[(<>()){}]>(<<{{', '>')])
+@pytest.mark.parametrize(
+    'line, expected',
+    [
+        ('{([(<{}[<>[]}>{[]{[(<()>', '}'),
+        ('[[<[([]))<([[{}[[()]]]', ')'),
+        ('[{[{({}]{}}([{[{{{}}([]', ']'),
+        ('[<(<(<(<{}))><([]([]()', ')'),
+        ('<{([([[(<>()){}]>(<<{{', '>'),
+    ],
+)
 def test_find_corrupted_line(line, expected):
     result = day.find_corrupted_line(line)
     assert result == expected
 
 
-@pytest.mark.parametrize('line, expected', [('[({(<(())[]>[[{[]{<()<>>', '}}]])})]'),
-                                            ('[(()[<>])]({[<{<<[]>>(', ')}>]})'),
-                                            ('(((({<>}<{<{<>}{[]{[]{}', '}}>}>))))'),
-                                            ('{<[[]]>}<{[{[{[]{()[[[]', ']]}}]}]}>'),
-                                            ('<{([{{}}[<[[[<>{}]]]>[]]', '])}>')])
+@pytest.mark.parametrize(
+    'line, expected',
+    [
+        ('[({(<(())[]>[[{[]{<()<>>', '}}]])})]'),
+        ('[(()[<>])]({[<{<<[]>>(', ')}>]})'),
+        ('(((({<>}<{<{<>}{[]{[]{}', '}}>}>))))'),
+        ('{<[[]]>}<{[{[{[]{()[[[]', ']]}}]}]}>'),
+        ('<{([{{}}[<[[[<>{}]]]>[]]', '])}>'),
+    ],
+)
 def test_find_incomplete_chunks(line, expected):
     result = day.correct_incomplete_chunks(line)
     assert result == expected
 
 
-@pytest.mark.parametrize('line, expected', [
-('}}]])})]', 288957),
-(')}>]})', 5566),
-('}}>}>))))', 1480781),
-(']]}}]}]}>', 995444),
-('])}>', 294)
-])
+@pytest.mark.parametrize(
+    'line, expected',
+    [
+        ('}}]])})]', 288957),
+        (')}>]})', 5566),
+        ('}}>}>))))', 1480781),
+        (']]}}]}]}>', 995444),
+        ('])}>', 294),
+    ],
+)
 def test_score_completion(line, expected):
     result = day.score_completion(line)
     assert result == expected

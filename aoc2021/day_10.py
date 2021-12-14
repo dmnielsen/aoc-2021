@@ -4,7 +4,6 @@ from typing import List
 from aoc2021 import AOC_DIR
 from aoc2021.util import print_solutions
 
-
 INPUT_FILENAME = AOC_DIR / 'inputs' / '202110_input.txt'
 
 
@@ -44,7 +43,9 @@ def correct_incomplete_chunks(line: str) -> str:
         line = replace_line
         replace_line = replace_chunks_in_line(line)
 
-    autocomplete = line[::-1].replace('(', ')', ).replace('[', ']').replace('{', '}').replace('<', '>')
+    autocomplete = (
+        line[::-1].replace('(', ')',).replace('[', ']').replace('{', '}').replace('<', '>')
+    )
     return autocomplete
 
 
@@ -67,9 +68,11 @@ def solve_part1(input_: str) -> int:
 
 def solve_part2(input_):
     lines = parse_input(input_)
-    incomplete_lines = [correct_incomplete_chunks(line) for line in lines if not find_corrupted_line(line)]
+    incomplete_lines = [
+        correct_incomplete_chunks(line) for line in lines if not find_corrupted_line(line)
+    ]
     scores = sorted([score_completion(line) for line in incomplete_lines])
-    return scores[len(scores)//2]
+    return scores[len(scores) // 2]
 
 
 def main(show_solution: bool = True):
