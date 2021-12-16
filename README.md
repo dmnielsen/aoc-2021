@@ -7,5 +7,5 @@ Here lies my overly verbose code for solving advent of code 2021.
 
 I have templates for each day and a script to automatically set up
 skeleton scripts and download the input. If I haven't used the script
-in a while, the cookie-based `USER_SESSION_ID` in `aoc2021/create_new_day.py`
+in a while, the cookie-based `AOC_SESSION` in `aoc2021/create_new_day.py`
 will need to be updated.

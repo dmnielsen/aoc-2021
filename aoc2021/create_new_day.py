@@ -1,4 +1,5 @@
 import argparse as arg
+import os
 import sys
 from pathlib import Path
 from string import Template
@@ -11,7 +12,7 @@ YEAR = 2021
 AOC_BASE_URL = 'https://adventofcode.com'
 FILE_DIR = Path(__file__).parent.absolute()
 # USER_SESSION_ID is found by inspecting session cookie content while logged into AOC
-USER_SESSION_ID = "53616c7465645f5f282e69cc8a7189803cee252976a18b3f32309953cadc3d42b0f933d703aefd03c22ba54c6c79675f"
+USER_SESSION_ID = os.environ['AOC_SESSION']
 USER_AGENT = "adventofcode_working_directories_creator"
 
 
