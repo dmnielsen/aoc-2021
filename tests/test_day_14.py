@@ -31,6 +31,14 @@ def trial_inputs(mock_input):
     return day.parse_input(mock_input)
 
 
+def test_create_polymer_pair_map():
+    rules = {'CH': 'B', 'HH': 'N', 'CB': 'H'}
+    expected = {'CH': ['CB', 'BH'], 'HH': ['HN', 'NH'], 'CB': ['CH', 'HB']}
+    result = day.create_polymer_pair_map(rules)
+    assert len(result) == len(expected)
+    assert all([sorted(result[k]) == sorted(v) for k, v in expected.items()])
+
+
 def test_insert_elements(trial_inputs):
     expected = 'NCNBCHB'
     result = day.insert_elements(*trial_inputs)
