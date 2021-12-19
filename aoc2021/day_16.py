@@ -23,11 +23,11 @@ def extract_literal_value(s: str):
     i = 0
     while True:
         if s[i] == '0':
-            bits.append(s[i+1:i+5])
+            bits.append(s[i + 1 : i + 5])
             i += 5
             break
         else:
-            bits.append(s[i + 1:i + 5])
+            bits.append(s[i + 1 : i + 5])
             i += 5
     return i, int(''.join(bits), 2)
 
@@ -37,8 +37,8 @@ def b2int(b: str) -> int:
 
 
 def part_one_again(i, message) -> Tuple[int, str]:
-    version_sum = b2int(message[i:i+3])
-    type_id = b2int(message[i+3:i+6])
+    version_sum = b2int(message[i : i + 3])
+    type_id = b2int(message[i + 3 : i + 6])
 
     i += 6
 
@@ -54,14 +54,14 @@ def part_one_again(i, message) -> Tuple[int, str]:
         i += 1
         if length_type_id == 0:
             # next 15 bits define length of sub-packet in bits
-            subpacket_end = i + 15 + b2int(message[i:i+15])
+            subpacket_end = i + 15 + b2int(message[i : i + 15])
             i += 15
             while i < subpacket_end:
                 i, version = part_one_again(i, message)
                 version_sum += version
         else:
             # next 11 bits define count of sub-packets
-            number_of_subpackets = b2int(message[i:i+11])
+            number_of_subpackets = b2int(message[i : i + 11])
             i += 11
             for n in range(number_of_subpackets):
                 i, version = part_one_again(i, message)
