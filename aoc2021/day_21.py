@@ -1,5 +1,7 @@
+from collections import Counter, defaultdict
+from itertools import product
 from pathlib import Path
-from typing import Tuple, List
+from typing import Dict, List, Tuple
 
 from aoc2021 import AOC_DIR
 from aoc2021.util import print_solutions
@@ -58,8 +60,73 @@ def solve_part1(input_: str) -> int:
     return losing_score * total_rolls
 
 
+def build_roll_map():
+    roll_map = {}
+    for i in range(1, 11):
+        roll_map[i] = {k: v if (v := (k + i) % 10) else 10 for k in range(3, 10)}
+    return roll_map
+
+
+def calculate_turns_to_win(positions: Dict[int, Counter], target=21) -> Dict[int, Counter]:
+
+    multiverse_roll = Counter([sum(s) for s in product([1, 2, 3], repeat=3)])
+    roll_map = build_roll_map()
+
+    n_turns_in_completed_game = defaultdict(int)
+    scores_after_turns_dict = {}
+    turns = 1
+
+    while True:
+        # print(f'Turn {turns}')
+        # print('------')
+        next_position = defaultdict(Counter)
+        scores_during_this_turn = Counter()
+        for roll_value, roll_count in multiverse_roll.items():
+            for cur_pos, scores in positions.items():
+                new_position = roll_map[cur_pos][roll_value]
+                new_scores = defaultdict(Counter)
+                for score, count in scores.items():
+                    if (p := score + new_position) < target:
+                        new_scores[p] = count * roll_count
+                    else:
+                        n_turns_in_completed_game[turns] += count * roll_count
+                    scores_during_this_turn.update({score + new_position: count * roll_count})
+                next_position[new_position].update(new_scores)
+                # print(next_position)
+
+        positions = next_position
+        scores_after_turns_dict[turns] = scores_during_this_turn
+        if all(not v for v in positions.values()):
+            break
+        turns += 1
+    return scores_after_turns_dict
+
+
 def solve_part2(input_: str):
-    return
+    loc1, loc2 = parse_input(input_)
+
+    target = 21
+
+    # position: Counter(score: count)
+    positions1 = {loc1: Counter([0])}
+    player1_turns = calculate_turns_to_win(positions1, target=target)
+
+    positions2 = {loc2: Counter([0])}
+    player2_turns = calculate_turns_to_win(positions2, target=target)
+
+    player1_wins = 0
+    player2_wins = 0
+    total_turns = min([len(player1_turns), len(player2_turns)])
+    for i in range(2, total_turns + 1):
+        for score, count in player1_turns[i].items():
+            if score >= 21:
+                games_won = sum([c for s, c in player2_turns[i - 1].items() if s < 21])
+                player1_wins += games_won * count
+        for score, count in player2_turns.items():
+            if score >= 21:
+                games_won = sum([c for s, c, in player1_turns[i].items() if s < 21])
+                player2_wins += games_won * count
+    return max([player1_wins, player2_wins])
 
 
 def main(show_solution: bool = True):

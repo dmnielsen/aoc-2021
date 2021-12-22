@@ -23,6 +23,6 @@ def test_solve_part1(mock_input):
 
 
 def test_solve_part2(mock_input):
-    expected = None
+    expected = 444356092776315
     result = day.solve_part2(mock_input)
     assert expected == result
